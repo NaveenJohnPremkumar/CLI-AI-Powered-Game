@@ -17,74 +17,74 @@ import base64
 import io
 from llava import describe_image
 
-def encode_image_to_base64(image_path):
-    with Image.open(image_path) as img:
-        # Convert to RGB if image is in RGBA format
-        if img.mode == 'RGBA':
-            img = img.convert('RGB')
+# def encode_image_to_base64(image_path):
+#     with Image.open(image_path) as img:
+#         # Convert to RGB if image is in RGBA format
+#         if img.mode == 'RGBA':
+#             img = img.convert('RGB')
         
-        # Convert image to base64
-        buffered = io.BytesIO()
-        img.save(buffered, format="JPEG")
-        img_str = base64.b64encode(buffered.getvalue()).decode()
-        return img_str
+#         # Convert image to base64
+#         buffered = io.BytesIO()
+#         img.save(buffered, format="JPEG")
+#         img_str = base64.b64encode(buffered.getvalue()).decode()
+#         return img_str
 
-def generate_story_from_image(image_path):
-    img_base64 = encode_image_to_base64(image_path)
+# def generate_story_from_image(image_path):
+#     img_base64 = encode_image_to_base64(image_path)
     
-    prompt = """Look carefully at the provided image and create a detailed 3-paragraph background story for a text adventure game that is deeply rooted in what you observe.
+#     prompt = """Look carefully at the provided image and create a detailed 3-paragraph background story for a text adventure game that is deeply rooted in what you observe.
 
-    First paragraph: Analyze the visual elements, atmosphere, and details in the image to vividly describe the setting and time period. Include specific details about the environment, architecture, technology level, weather, or other notable features you can see.
+#     First paragraph: Analyze the visual elements, atmosphere, and details in the image to vividly describe the setting and time period. Include specific details about the environment, architecture, technology level, weather, or other notable features you can see.
 
-    Second paragraph: Based on the mood, objects, characters, or situations depicted in the image, construct a central conflict or challenge. Focus on elements that are either directly visible or strongly suggested by the scene - perhaps a looming threat, a mysterious object, signs of recent conflict, or environmental hazards.
+#     Second paragraph: Based on the mood, objects, characters, or situations depicted in the image, construct a central conflict or challenge. Focus on elements that are either directly visible or strongly suggested by the scene - perhaps a looming threat, a mysterious object, signs of recent conflict, or environmental hazards.
 
-    Third paragraph: Drawing from the scene shown, establish the player character's role and immediate circumstances. Consider their apparent position in the image, any visible equipment or clothing they might have, and their relationship to the environment and conflict you've described.
+#     Third paragraph: Drawing from the scene shown, establish the player character's role and immediate circumstances. Consider their apparent position in the image, any visible equipment or clothing they might have, and their relationship to the environment and conflict you've described.
 
-    Keep your descriptions grounded in what you can actually see in the image. Use present tense and refer to the player as "you" or "the player". Ensure every detail you include is supported by visual evidence from the provided image.
+#     Keep your descriptions grounded in what you can actually see in the image. Use present tense and refer to the player as "you" or "the player". Ensure every detail you include is supported by visual evidence from the provided image.
 
-    ### Structure:
-    1. **Setting:** 
-    - Describe a unique world (e.g., fantasy, sci-fi, post-apocalyptic).  
-    - Establish the current state of the world and any major conflicts.  
+#     ### Structure:
+#     1. **Setting:** 
+#     - Describe a unique world (e.g., fantasy, sci-fi, post-apocalyptic).  
+#     - Establish the current state of the world and any major conflicts.  
 
-    2. **Main Objective:**  
-    - Define the player’s overarching goal (e.g., escape, find an artifact, solve a mystery).  
+#     2. **Main Objective:**  
+#     - Define the player’s overarching goal (e.g., escape, find an artifact, solve a mystery).  
 
-    3. **Key Locations & NPCs:**  
-    - Create 3-5 major locations with distinct challenges.  
-    - Introduce key NPCs and factions that shape the story.  
+#     3. **Key Locations & NPCs:**  
+#     - Create 3-5 major locations with distinct challenges.  
+#     - Introduce key NPCs and factions that shape the story.  
 
-    4. **Sidekick:**  
-    - Introduce a sidekick character who accompanies the player.  
-    - Describe their background, abilities, and how they assist the player.  
+#     4. **Sidekick:**  
+#     - Introduce a sidekick character who accompanies the player.  
+#     - Describe their background, abilities, and how they assist the player.  
 
-    5. **Dynamic Elements:**  
-    - Ensure the world evolves based on the player’s choices.  
-    - Leave room for AI-generated details to emerge during gameplay.  
+#     5. **Dynamic Elements:**  
+#     - Ensure the world evolves based on the player’s choices.  
+#     - Leave room for AI-generated details to emerge during gameplay.  
 
-    Keep descriptions immersive but brief. The game world should unfold naturally as the player interacts with it.
-    Output should be in paragraph format. Limit the output to 3 paragraphs. Use natural language like since you are explaining directly to the player."""
+#     Keep descriptions immersive but brief. The game world should unfold naturally as the player interacts with it.
+#     Output should be in paragraph format. Limit the output to 3 paragraphs. Use natural language like since you are explaining directly to the player."""
  
-    story = ""
-    inside_think = False
+#     story = ""
+#     inside_think = False
     
-    for part in generate(
-        model="bsahane/Qwen2.5-VL-7B-Instruct:Q4_K_M_benxh",
-        prompt=prompt,
-        images=[img_base64],
-        stream=True
-    ):
-        response = part['response']
-        if '<think>' in response:
-            inside_think = True
-        if '</think>' in response:
-            inside_think = False
-            continue
-        if not inside_think:
-            print(response, end="", flush=True)
-            story += response
+#     for part in generate(
+#         model="bsahane/Qwen2.5-VL-7B-Instruct:Q4_K_M_benxh",
+#         prompt=prompt,
+#         images=[img_base64],
+#         stream=True
+#     ):
+#         response = part['response']
+#         if '<think>' in response:
+#             inside_think = True
+#         if '</think>' in response:
+#             inside_think = False
+#             continue
+#         if not inside_think:
+#             print(response, end="", flush=True)
+#             story += response
             
-    return story
+#     return story
 
 def generate_story_text():
     game_prompt = """
