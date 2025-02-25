@@ -1,6 +1,6 @@
 # AI-Powered Text Adventure Game
 
-This project is an AI-powered text adventure game that uses advanced language models to generate immersive stories and respond to player inputs. The game master is an AI that describes the world, reacts to player actions, and makes the game engaging.
+This project is an AI-powered text adventure game that uses advanced language models to generate immersive stories and respond to player inputs. The game master is an AI that describes the world, reacts to player actions, and makes the game engaging. Since I use a a 14b parameter model, it can be pretty slow
 
 ## Features
 
@@ -73,14 +73,6 @@ To start the game, run the following command:
 
 ```sh
 python game.py
-```
-
-### Using the Image Description Feature
-
-To use an image to influence the story, you can run the `llava.py` script with the path to your image file:
-
-```sh
-python llava.py <image_path>
 ```
 
 ### Example Usage
