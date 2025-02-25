@@ -57,7 +57,8 @@ This project is an AI-powered text adventure game that uses advanced language mo
 6. **Download the required models:**
 
    - **Whisper Model:**
-     Download the `base.en.pt` model from [Whisper](https://github.com/openai/whisper) and place it in the `whisper` directory.
+     Download the `base.en.pt` model from [Whisper](https://github.com/openai/whisper) and place it in the main directory.
+     "https://openaipublic.azureedge.net/main/whisper/models/25a8566e1d0c1e2231d1c762132cd20e0f96a85d16145c3a00adf5d1ac670ead/base.en.pt"
 
    - **LLaVA Model:**
      Ensure you have access to the `llava` and `deepseek-r1:14b` models from Ollama. You can download them using the following commands:
