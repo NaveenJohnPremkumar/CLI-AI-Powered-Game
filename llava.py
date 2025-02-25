@@ -1,7 +1,4 @@
 import ollama
-from PIL import Image
-import base64
-import io
 import sys
 
 

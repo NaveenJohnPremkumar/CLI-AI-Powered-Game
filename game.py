@@ -12,7 +12,7 @@ from ollama import generate
 # from langchain.memory import ConversationBufferMemory
 from langchain_core.output_parsers import StrOutputParser
 #from langchain.chains import create_history_aware_retriever
-from PIL import Image
+#from PIL import Image
 import base64
 import io
 from llava import describe_image
